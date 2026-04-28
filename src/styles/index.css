@@ -1,0 +1,274 @@
+/* =========================================================
+   DESIGN TOKENS — AI Lab Portfolio
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* Neon Color Palette */
+  --neon-blue:    #00d4ff;
+  --neon-purple:  #a855f7;
+  --neon-cyan:    #06b6d4;
+  --neon-pink:    #ec4899;
+  --neon-green:   #10b981;
+
+  /* Backgrounds */
+  --bg-primary:   #020817;
+  --bg-secondary: #0a1628;
+  --bg-card:      rgba(10, 22, 40, 0.7);
+  --bg-glass:     rgba(0, 212, 255, 0.05);
+
+  /* Text */
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+
+  /* Borders */
+  --border-glass: rgba(0, 212, 255, 0.15);
+  --border-neon:  rgba(0, 212, 255, 0.4);
+
+  /* Fonts */
+  --font-display: 'Orbitron', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --section-padding: 5rem 2rem;
+
+  /* Transitions */
+  --transition-fast:   0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:   0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide default cursor — custom cursor active */
+* { cursor: none !important; }
+
+a { text-decoration: none; color: inherit; }
+button { background: none; border: none; font-family: inherit; cursor: none !important; }
+ul { list-style: none; }
+
+img, video { max-width: 100%; }
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border-radius: 2px;
+}
+
+/* =========================================================
+   GLASSMORPHISM UTILITIES
+   ========================================================= */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+}
+
+.glass-card {
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+}
+
+/* =========================================================
+   NEON GLOW UTILITIES
+   ========================================================= */
+.glow-blue   { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+.glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+.glow-cyan   { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+
+.text-glow-blue   { text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.4); }
+.text-glow-purple { text-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(168, 85, 247, 0.4); }
+
+/* =========================================================
+   NEON BUTTON
+   ========================================================= */
+.btn-neon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--neon-blue);
+  border: 1px solid var(--neon-blue);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-normal);
+  text-transform: uppercase;
+}
+
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--neon-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+  z-index: -1;
+}
+
+.btn-neon:hover {
+  color: var(--bg-primary);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+}
+
+.btn-neon:hover::before { transform: scaleX(1); }
+
+.btn-neon-purple {
+  color: var(--neon-purple);
+  border-color: var(--neon-purple);
+}
+.btn-neon-purple::before { background: var(--neon-purple); }
+.btn-neon-purple:hover { box-shadow: 0 0 30px rgba(168, 85, 247, 0.5); }
+
+/* =========================================================
+   SECTION WRAPPER
+   ========================================================= */
+.section {
+  position: relative;
+  padding: var(--section-padding);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--neon-cyan);
+  text-align: center;
+  margin-bottom: 4rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   SCAN LINE EFFECT
+   ========================================================= */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 212, 255, 0.015) 2px,
+    rgba(0, 212, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================================
+   PULSE ANIMATION
+   ========================================================= */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--neon-blue); }
+  50%       { opacity: 0.7; box-shadow: 0 0 30px var(--neon-blue), 0 0 60px var(--neon-blue); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes data-stream {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes neon-border {
+  0%, 100% { border-color: rgba(0, 212, 255, 0.2); box-shadow: 0 0 5px rgba(0,212,255,0.1); }
+  50%       { border-color: rgba(0, 212, 255, 0.6); box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+}
+
+/* =========================================================
+   CANVAS OVERLAY
+   ========================================================= */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+canvas { display: block; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  :root { --section-padding: 4rem 1.25rem; }
+  body { cursor: auto; }
+  * { cursor: auto !important; }
+}

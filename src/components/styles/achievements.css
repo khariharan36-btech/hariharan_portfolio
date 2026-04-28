@@ -1,0 +1,70 @@
+/* =========================================================
+   ACHIEVEMENTS SECTION
+   ========================================================= */
+.achievements { background: var(--bg-primary); }
+
+.achievements-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 3rem; }
+
+/* Stat counters row */
+.achievements-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.stat-card {
+  background: rgba(10,22,40,0.7);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  animation: neon-border 3s ease infinite;
+}
+.stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.stat-value { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--neon-blue); display: block; }
+.stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem; }
+
+/* Certifications */
+.achievements-certs-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--neon-purple);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.cert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(10,22,40,0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.cert-card:hover { transform: translateX(4px); border-color: var(--border-neon); }
+.cert-bar { width: 3px; border-radius: 2px; align-self: stretch; flex-shrink: 0; }
+.cert-info {}
+.cert-title { font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.2rem; }
+.cert-issuer { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); }
+.cert-year { font-family: var(--font-mono); font-size: 0.65rem; color: var(--neon-cyan); margin-top: 0.2rem; }
+
+/* HUD Radar */
+.achievements-hud { display: flex; gap: 2rem; align-items: center; }
+.hud-radar { flex-shrink: 0; }
+.hud-radar svg { overflow: visible; }
+.hud-labels { flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+.hud-label-item { display: flex; align-items: center; gap: 0.75rem; }
+.hud-label-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.hud-label-name { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
+.hud-label-val { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; color: var(--neon-blue); margin-left: auto; }
+
+@media (max-width: 900px) {
+  .achievements-stats { grid-template-columns: repeat(2, 1fr); }
+  .certs-grid { grid-template-columns: 1fr; }
+  .achievements-hud { flex-direction: column; }
+}
+@media (max-width: 500px) { .achievements-stats { grid-template-columns: 1fr 1fr; } }
