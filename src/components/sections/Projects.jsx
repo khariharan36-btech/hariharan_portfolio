@@ -8,7 +8,6 @@ function ProjectModal({ project, onClose }) {
     <div className="project-modal-overlay" onClick={onClose}>
       <div className="project-modal" onClick={e => e.stopPropagation()}>
         <button className="project-modal-close" onClick={onClose}>✕</button>
-        <div className="project-modal-icon">{project.icon}</div>
         <h3 className="project-modal-title">{project.title}</h3>
         <p className="project-modal-subtitle">{project.subtitle} · {project.year}</p>
         <p className="project-modal-desc">{project.description}</p>

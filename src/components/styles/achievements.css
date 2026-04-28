@@ -3,9 +3,15 @@
    ========================================================= */
 .achievements { background: var(--bg-primary); }
 
-.achievements-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 3rem; }
+.achievements-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 
-/* Stat counters row */
+/* ── Stat counters ───────────────────────────────────────── */
 .achievements-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -21,11 +27,103 @@
   animation: neon-border 3s ease infinite;
 }
 .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-.stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-.stat-value { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--neon-blue); display: block; }
-.stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem; }
 
-/* Certifications */
+.stat-icon-wrap {
+  font-size: 1.8rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--neon-blue);
+  display: block;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+/* ── HUD with radar + skill bars ─────────────────────────── */
+.achievements-hud {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  background: rgba(10,22,40,0.5);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 2rem;
+}
+
+.hud-radar { flex-shrink: 0; }
+.hud-radar svg { overflow: visible; }
+
+/* Skill bars column */
+.hud-labels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.hud-label-item {
+  display: grid;
+  grid-template-columns: 10px 80px 36px 1fr;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.hud-label-item:hover,
+.hud-label-active {
+  background: rgba(0,212,255,0.06);
+}
+
+.hud-label-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.hud-label-active .hud-label-dot { transform: scale(1.4); }
+
+.hud-label-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.hud-label-val {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--neon-blue);
+  text-align: right;
+}
+
+/* Progress bar */
+.hud-bar-bg {
+  height: 5px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 60px;
+}
+.hud-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  width: 0;          /* starts at 0, animated via JS */
+}
+
+/* ── Certifications ──────────────────────────────────────── */
 .achievements-certs-title {
   font-family: var(--font-display);
   font-size: 0.85rem;
@@ -34,7 +132,11 @@
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
-.certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
 .cert-card {
   display: flex;
   align-items: flex-start;
@@ -47,24 +149,18 @@
 }
 .cert-card:hover { transform: translateX(4px); border-color: var(--border-neon); }
 .cert-bar { width: 3px; border-radius: 2px; align-self: stretch; flex-shrink: 0; }
-.cert-info {}
-.cert-title { font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.2rem; }
+.cert-title  { font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.2rem; }
 .cert-issuer { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); }
-.cert-year { font-family: var(--font-mono); font-size: 0.65rem; color: var(--neon-cyan); margin-top: 0.2rem; }
+.cert-year   { font-family: var(--font-mono); font-size: 0.65rem; color: var(--neon-cyan); margin-top: 0.2rem; }
 
-/* HUD Radar */
-.achievements-hud { display: flex; gap: 2rem; align-items: center; }
-.hud-radar { flex-shrink: 0; }
-.hud-radar svg { overflow: visible; }
-.hud-labels { flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
-.hud-label-item { display: flex; align-items: center; gap: 0.75rem; }
-.hud-label-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.hud-label-name { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
-.hud-label-val { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; color: var(--neon-blue); margin-left: auto; }
-
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 900px) {
   .achievements-stats { grid-template-columns: repeat(2, 1fr); }
-  .certs-grid { grid-template-columns: 1fr; }
-  .achievements-hud { flex-direction: column; }
+  .certs-grid         { grid-template-columns: 1fr; }
+  .achievements-hud   { flex-direction: column; align-items: flex-start; }
+  .hud-labels         { width: 100%; }
+  .hud-label-item     { grid-template-columns: 10px 80px 36px 1fr; }
 }
-@media (max-width: 500px) { .achievements-stats { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) {
+  .achievements-stats { grid-template-columns: 1fr 1fr; }
+}

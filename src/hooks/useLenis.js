@@ -2,24 +2,27 @@ import { useEffect } from 'react';
 
 export function useLenis() {
   useEffect(() => {
-    // Dynamic import so SSR / non-lenis environments don't break
     let lenis;
     import('@studio-freight/lenis').then(({ default: Lenis }) => {
       lenis = new Lenis({
-        duration: 1.4,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 0.8,                              // was 1.4 — snappier feel
+        easing: (t) => 1 - Math.pow(1 - t, 3),     // simpler cubic ease-out
         smooth: true,
         smoothTouch: false,
+        syncTouch: false,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.5,
       });
 
+      let rafId;
       function raf(time) {
         lenis.raf(time);
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
       }
-      requestAnimationFrame(raf);
-    }).catch(() => {
-      // Graceful fallback — native scroll
-    });
+      rafId = requestAnimationFrame(raf);
+
+      return () => cancelAnimationFrame(rafId);
+    }).catch(() => {});
 
     return () => {
       if (lenis) lenis.destroy();

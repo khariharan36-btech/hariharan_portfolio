@@ -44,7 +44,7 @@ function SkillCard({ skill }) {
 
       <div className="skill-info">
         <div className="skill-name" style={{ color: skill.color }}>
-          <span>{skill.icon}</span> {skill.name}
+          {skill.name}
         </div>
         <p className="skill-desc">{skill.description}</p>
 

@@ -12,7 +12,11 @@ export default function Cursor() {
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    let mx = 0, my = 0, rx = 0, ry = 0;
+    // Initialise at centre so ring doesn't fly from (0,0) on first click
+    let mx = window.innerWidth  / 2;
+    let my = window.innerHeight / 2;
+    let rx = mx, ry = my;
+    let rafId;
 
     const move = (e) => {
       mx = e.clientX;
@@ -24,15 +28,14 @@ export default function Cursor() {
       rx += (mx - rx) * 0.12;
       ry += (my - ry) * 0.12;
       ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px)`;
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
     };
 
     const down = () => setClicking(true);
     const up   = () => setClicking(false);
 
     const over = (e) => {
-      const el = e.target;
-      if (el.closest('a, button, [data-cursor="pointer"]')) setHovering(true);
+      if (e.target.closest('a, button, [data-cursor="pointer"]')) setHovering(true);
     };
     const out = () => setHovering(false);
 
@@ -41,9 +44,10 @@ export default function Cursor() {
     window.addEventListener('mouseup',   up);
     window.addEventListener('mouseover', over);
     window.addEventListener('mouseout',  out);
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', move);
       window.removeEventListener('mousedown', down);
       window.removeEventListener('mouseup',   up);
